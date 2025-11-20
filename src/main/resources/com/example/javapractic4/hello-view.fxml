@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javapractic4.HelloController">
+
+    <center>
+        <GridPane fx:id="MainView" style="-fx-padding: 20;">
+            <TabPane tabClosingPolicy="UNAVAILABLE" GridPane.columnIndex="0" GridPane.rowIndex="0">
+
+                <!-- Вкладка Customers -->
+                <Tab text="Клиенты">
+                    <VBox spacing="10" style="-fx-padding: 15;">
+                        <HBox spacing="10" alignment="CENTER_LEFT">
+                            <Button text="Добавить" onAction="#onAddCustomer"/>
+                            <Button text="Изменить" onAction="#onChangeCustomer"/>
+                            <Button text="Удалить" onAction="#onDeleteCustomer"/>
+                        </HBox>
+                        <TableView fx:id="CustomersTable" prefHeight="400">
+                            <columns>
+                                <TableColumn fx:id="CustomerIdColumn" text="ID"/>
+                                <TableColumn fx:id="CustomerNameColumn" text="ФИО"/>
+                                <TableColumn fx:id="CustomerPhoneColumn" text="Телефон"/>
+                                <TableColumn fx:id="CustomerAddressColumn" text="Адрес"/>
+                            </columns>
+                        </TableView>
+                    </VBox>
+                </Tab>
+
+                <!-- Вкладка Orders -->
+                <Tab text="Заказы">
+                    <VBox spacing="10" style="-fx-padding: 15;">
+                        <HBox spacing="10" alignment="CENTER_LEFT">
+                            <Button text="Добавить" onAction="#onAddOrder"/>
+                            <Button text="Изменить" onAction="#onChangeOrder"/>
+                            <Button text="Удалить" onAction="#onDeleteOrder"/>
+                        </HBox>
+                        <TableView fx:id="OrdersTable" prefHeight="400">
+                            <columns>
+                                <TableColumn fx:id="OrderIdColumn" text="ID заказа"/>
+                                <TableColumn fx:id="OrderCustomerIdColumn" text="ID клиента"/>
+                                <TableColumn fx:id="OrderTotalColumn" text="Сумма"/>
+                                <TableColumn fx:id="OrderStatusColumn" text="Статус"/>
+                            </columns>
+                        </TableView>
+                    </VBox>
+                </Tab>
+
+                <!-- Вкладка Categories -->
+                <Tab text="Категории">
+                    <VBox spacing="10" style="-fx-padding: 15;">
+                        <HBox spacing="10" alignment="CENTER_LEFT">
+                            <Button text="Добавить" onAction="#onAddCategory"/>
+                            <Button text="Изменить" onAction="#onChangeCategory"/>
+                            <Button text="Удалить" onAction="#onDeleteCategory"/>
+                        </HBox>
+                        <TableView fx:id="CategoriesTable" prefHeight="400">
+                            <columns>
+                                <TableColumn fx:id="CategoryIdColumn" text="ID категории"/>
+                                <TableColumn fx:id="CategoryNameColumn" text="Название"/>
+                            </columns>
+                        </TableView>
+                    </VBox>
+                </Tab>
+
+                <!-- Вкладка Furniture -->
+                <Tab text="Мебель">
+                    <VBox spacing="10" style="-fx-padding: 15;">
+                        <HBox spacing="10" alignment="CENTER_LEFT">
+                            <Button text="Добавить" onAction="#onAddFurniture"/>
+                            <Button text="Изменить" onAction="#onChangeFurniture"/>
+                            <Button text="Удалить" onAction="#onDeleteFurniture"/>
+                        </HBox>
+                        <TableView fx:id="FurnitureTable" prefHeight="400">
+                            <columns>
+                                <TableColumn fx:id="FurnitureIdColumn" text="ID мебели"/>
+                                <TableColumn fx:id="FurnitureNameColumn" text="Название"/>
+                                <TableColumn fx:id="FurniturePriceColumn" text="Цена"/>
+                                <TableColumn fx:id="FurnitureCategoryIdColumn" text="ID категории"/>
+                            </columns>
+                        </TableView>
+                    </VBox>
+                </Tab>
+
+                <!-- Вкладка Order Items -->
+                <Tab text="Позиции заказов">
+                    <VBox spacing="10" style="-fx-padding: 15;">
+                        <HBox spacing="10" alignment="CENTER_LEFT">
+                            <Button text="Добавить" onAction="#onAddOrderItem"/>
+                            <Button text="Изменить" onAction="#onChangeOrderItem"/>
+                            <Button text="Удалить" onAction="#onDeleteOrderItem"/>
+                        </HBox>
+                        <TableView fx:id="OrderItemsTable" prefHeight="400">
+                            <columns>
+                                <TableColumn fx:id="OrderItemIdColumn" text="ID позиции"/>
+                                <TableColumn fx:id="OrderItemOrderIdColumn" text="ID заказа"/>
+                                <TableColumn fx:id="OrderItemFurnitureIdColumn" text="ID мебели"/>
+                                <TableColumn fx:id="OrderItemCountColumn" text="Количество"/>
+                            </columns>
+                        </TableView>
+                    </VBox>
+                </Tab>
+            </TabPane>
+        </GridPane>
+    </center>
+
+    <!-- Форма для Customers -->
+    <AnchorPane fx:id="CustomerForm" visible="false" style="-fx-background-color: rgba(0,0,0,0.7);">
+        <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 20; -fx-border-color: #ccc; -fx-border-width: 1;"
+              alignment="CENTER" layoutX="50" layoutY="100">
+            <Label text="Клиент" style="-fx-font-size: 16; -fx-font-weight: bold;"/>
+
+            <GridPane hgap="10" vgap="10">
+                <Label text="ID:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                <TextField fx:id="customerIdField" GridPane.columnIndex="1" GridPane.rowIndex="0" prefWidth="200" editable="false"/>
+
+                <Label text="ФИО:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                <TextField fx:id="customerNameField" GridPane.columnIndex="1" GridPane.rowIndex="1" prefWidth="200"/>
+
+                <Label text="Телефон:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                <TextField fx:id="customerPhoneField" GridPane.columnIndex="1" GridPane.rowIndex="2" prefWidth="200"/>
+
+                <Label text="Адрес:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                <TextField fx:id="customerAddressField" GridPane.columnIndex="1" GridPane.rowIndex="3" prefWidth="200"/>
+            </GridPane>
+
+            <HBox spacing="20" alignment="CENTER">
+                <Button text="Сохранить" onAction="#saveCustomer" defaultButton="true"/>
+                <Button text="Отмена" onAction="#cancelCustomer" cancelButton="true"/>
+            </HBox>
+        </VBox>
+    </AnchorPane>
+
+    <!-- Форма для Orders -->
+    <AnchorPane fx:id="OrderForm" visible="false" style="-fx-background-color: rgba(0,0,0,0.7);">
+        <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 20; -fx-border-color: #ccc; -fx-border-width: 1;"
+              alignment="CENTER" layoutX="50" layoutY="100">
+            <Label text="Заказ" style="-fx-font-size: 16; -fx-font-weight: bold;"/>
+
+            <GridPane hgap="10" vgap="10">
+                <Label text="ID заказа:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                <TextField fx:id="orderIdField" GridPane.columnIndex="1" GridPane.rowIndex="0" prefWidth="200" editable="false"/>
+
+                <Label text="ID клиента:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                <TextField fx:id="orderCustomerIdField" GridPane.columnIndex="1" GridPane.rowIndex="1" prefWidth="200"/>
+
+                <Label text="Сумма:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                <TextField fx:id="orderTotalField" GridPane.columnIndex="1" GridPane.rowIndex="2" prefWidth="200"/>
+
+                <Label text="Статус:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                <TextField fx:id="orderStatusField" GridPane.columnIndex="1" GridPane.rowIndex="3" prefWidth="200"/>
+            </GridPane>
+
+            <HBox spacing="20" alignment="CENTER">
+                <Button text="Сохранить" onAction="#saveOrder" defaultButton="true"/>
+                <Button text="Отмена" onAction="#cancelOrder" cancelButton="true"/>
+            </HBox>
+        </VBox>
+    </AnchorPane>
+
+    <!-- Форма для Categories -->
+    <AnchorPane fx:id="CategoryForm" visible="false" style="-fx-background-color: rgba(0,0,0,0.7);">
+        <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 20; -fx-border-color: #ccc; -fx-border-width: 1;"
+              alignment="CENTER" layoutX="50" layoutY="100">
+            <Label text="Категория" style="-fx-font-size: 16; -fx-font-weight: bold;"/>
+
+            <GridPane hgap="10" vgap="10">
+                <Label text="ID категории:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                <TextField fx:id="categoryIdField" GridPane.columnIndex="1" GridPane.rowIndex="0" prefWidth="200" editable="false"/>
+
+                <Label text="Название:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                <TextField fx:id="categoryNameField" GridPane.columnIndex="1" GridPane.rowIndex="1" prefWidth="200"/>
+            </GridPane>
+
+            <HBox spacing="20" alignment="CENTER">
+                <Button text="Сохранить" onAction="#saveCategory" defaultButton="true"/>
+                <Button text="Отмена" onAction="#cancelCategory" cancelButton="true"/>
+            </HBox>
+        </VBox>
+    </AnchorPane>
+
+    <!-- Форма для Furniture -->
+    <AnchorPane fx:id="FurnitureForm" visible="false" style="-fx-background-color: rgba(0,0,0,0.7);">
+        <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 20; -fx-border-color: #ccc; -fx-border-width: 1;"
+              alignment="CENTER" layoutX="50" layoutY="100">
+            <Label text="Мебель" style="-fx-font-size: 16; -fx-font-weight: bold;"/>
+
+            <GridPane hgap="10" vgap="10">
+                <Label text="ID мебели:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                <TextField fx:id="furnitureIdField" GridPane.columnIndex="1" GridPane.rowIndex="0" prefWidth="200" editable="false"/>
+
+                <Label text="Название:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                <TextField fx:id="furnitureNameField" GridPane.columnIndex="1" GridPane.rowIndex="1" prefWidth="200"/>
+
+                <Label text="Цена:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                <TextField fx:id="furniturePriceField" GridPane.columnIndex="1" GridPane.rowIndex="2" prefWidth="200"/>
+
+                <Label text="ID категории:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                <TextField fx:id="furnitureCategoryIdField" GridPane.columnIndex="1" GridPane.rowIndex="3" prefWidth="200"/>
+            </GridPane>
+
+            <HBox spacing="20" alignment="CENTER">
+                <Button text="Сохранить" onAction="#saveFurniture" defaultButton="true"/>
+                <Button text="Отмена" onAction="#cancelFurniture" cancelButton="true"/>
+            </HBox>
+        </VBox>
+    </AnchorPane>
+
+    <!-- Форма для OrderItems -->
+    <AnchorPane fx:id="OrderItemForm" visible="false" style="-fx-background-color: rgba(0,0,0,0.7);">
+        <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 20; -fx-border-color: #ccc; -fx-border-width: 1;"
+              alignment="CENTER" layoutX="50" layoutY="100">
+            <Label text="Позиция заказа" style="-fx-font-size: 16; -fx-font-weight: bold;"/>
+
+            <GridPane hgap="10" vgap="10">
+                <Label text="ID позиции:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                <TextField fx:id="orderItemIdField" GridPane.columnIndex="1" GridPane.rowIndex="0" prefWidth="200" editable="false"/>
+
+                <Label text="ID заказа:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                <TextField fx:id="orderItemOrderIdField" GridPane.columnIndex="1" GridPane.rowIndex="1" prefWidth="200"/>
+
+                <Label text="ID мебели:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                <TextField fx:id="orderItemFurnitureIdField" GridPane.columnIndex="1" GridPane.rowIndex="2" prefWidth="200"/>
+
+                <Label text="Количество:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                <TextField fx:id="orderItemCountField" GridPane.columnIndex="1" GridPane.rowIndex="3" prefWidth="200"/>
+            </GridPane>
+
+            <HBox spacing="20" alignment="CENTER">
+                <Button text="Сохранить" onAction="#saveOrderItem" defaultButton="true"/>
+                <Button text="Отмена" onAction="#cancelOrderItem" cancelButton="true"/>
+            </HBox>
+        </VBox>
+    </AnchorPane>
+</BorderPane>
